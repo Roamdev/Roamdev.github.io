@@ -5,7 +5,7 @@ import './AddItem.scss'
 export default class AddItem extends Component {
   // const {onAdded} = this.props;
   render() {
-    const {onAdded} = this.props
+    const {onAddItem} = this.props
     return (
       <div className="add-item">
       {/* <input
@@ -14,7 +14,7 @@ export default class AddItem extends Component {
       ></input> */}
       <button
         className='btn btn-outline-secondary'
-        onClick={() => onAdded('work')}
+        onClick={() => onAddItem('work')}
         >Add Todo
       </button>
     </div>

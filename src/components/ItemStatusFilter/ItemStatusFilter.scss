@@ -1,0 +1,11 @@
+.btn-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    margin: 1rem 0 0 0;
+    display: flex;
+    // width: auto;
+  }
+}
