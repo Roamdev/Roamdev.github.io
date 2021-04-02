@@ -87,19 +87,19 @@ export default class App extends Component {
 
     return (
       <div className='todo-app'>
-      <AppHeader toDo={todoCount} done={doneCount} />
-      <div className='top-panel d-flex'>
-        <SearchPanel />
+        <AppHeader toDo={todoCount} done={doneCount} />
+        <div className='top-panel d-flex'>
+          <SearchPanel />
+          <ItemStatusFilter />
+        </div>
+        <TodoList
+          todos={todoData}
+          onDeleted={this.deleteItem}
+          onToggleImportant={this.onToggleImportant}
+          onToggleDone={this.onToggleDone}
+        />
         <AddItem onAddItem={this.addItem}/>
-        <ItemStatusFilter />
       </div>
-      <TodoList
-        todos={todoData}
-        onDeleted={this.deleteItem}
-        onToggleImportant={this.onToggleImportant}
-        onToggleDone={this.onToggleDone}
-      />
-    </div>
     )
   };
 };
