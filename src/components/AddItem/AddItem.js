@@ -5,7 +5,7 @@ import './AddItem.scss'
 export default class AddItem extends Component {
 
   state = {
-    label: ''
+    label: this.props.todos.label
   }
 
   onLabelChange = (e) => {
@@ -16,21 +16,25 @@ export default class AddItem extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.onAddItem(this.state.label)
+    this.props.onAddItem(this.state.label);
+    this.setState({
+      label: ''
+    })
   }
 
   render() {
-    const {onAddItem} = this.props
     return (
       <form
-            className="add-item"
-            onSubmit={this.onSubmit}>
+        className="add-item"
+        onSubmit={this.onSubmit}>
 
         <input
           type='text'
           className='add-item--input form-control search-input'
           onChange={this.onLabelChange}
-          placeholder='What needs to be done' />
+          placeholder='What needs to be done'
+          value={this.state.label}
+          />
 
         <button
           className='btn btn-outline-secondary'
