@@ -18,7 +18,8 @@ export default class App extends Component {
       this.createTodoItem('Look For A Job'),
       this.createTodoItem('Think About IT')
     ],
-    term: ''
+    term: '',
+    filter: 'all'
   };
 
   createTodoItem(label) {
@@ -95,9 +96,25 @@ export default class App extends Component {
     this.setState({term});
   }
 
+  filterStatus(items, filter) {
+    switch(filter) {
+      case 'all' :
+        return items;
+      case 'active' :
+        return items.filter((item) => !item.done);
+      case 'done' :
+        return items.filter((item) => item.done);
+      default: 
+      return items
+    }
+  }
+  onFilterSwitch = (filter) => {
+    this.setState({filter})
+  }
+
   render() {
-    const {todoData, term} = this.state;
-    const visibleItems = this.search(todoData, term)
+    const {todoData, term, filter} = this.state;
+    const visibleItems = this.filterStatus(this.search(todoData, term), filter);
     const doneCount = this.state.todoData.filter((el) => el.done).length;
     const todoCount = this.state.todoData.length - doneCount;
 
@@ -112,7 +129,10 @@ export default class App extends Component {
             todos={todoData}
             handleSearch={this.handleSearch}
           />
-          <ItemStatusFilter />
+          <ItemStatusFilter 
+            filter={filter}
+            onFilterSwitch = {this.onFilterSwitch}
+          />
         </div>
         <TodoList
           todos={visibleItems}
